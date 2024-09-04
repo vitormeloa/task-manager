@@ -65,4 +65,12 @@ class TaskManager extends Component
         Task::findOrFail($id)->delete();
         session()->flash('message', 'Task deleted successfully.');
     }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName, [
+            'title' => 'required|max:255',
+            'description' => 'nullable',
+        ]);
+    }
 }
